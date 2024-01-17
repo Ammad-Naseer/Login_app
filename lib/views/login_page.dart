@@ -3,8 +3,11 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import '../controllers/login_controller.dart';
 import '../widgets/custom_input_field.dart';
+// ignore: unused_import
+import 'package:lottie/lottie.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -30,8 +33,9 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: WillPopScope(
-        onWillPop: () async => widget.controller.onBackPressed(),
+      body: PopScope(
+        canPop: true,
+        onPopInvoked: (didPop) async => widget.controller.onBackPressed(),
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -40,6 +44,8 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  SvgPicture.asset('assets/images/login.svg',
+                      width: 200, height: 200),
                   CustomInputField(
                     controller: widget.controller.emailController,
                     hintText: "Email",
